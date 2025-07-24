@@ -1,0 +1,104 @@
+
+openapi: 3.0.3
+info:
+  title: Simple CRUD API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /items:
+    get:
+      summary: Get all items
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create new item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':
+          description: Created
+  /items/{id}:
+    get:
+      summary: Get item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        name:
+          type: string
+          example: "Alice Johnson"
+        age:
+          type: integer
+          example: 28
+        email:
+          type: string
+          example: "alice@example.com"
+        phone:
+          type: string
+          example: "+998901234567"
+        address:
+          type: string
+          example: "123 Elm Street, Tashkent"
+        status:
+          type: string
+          example: "active"
+        date:
+          type: string
+          format: date
+          example: "2025-07-24"
+        image:
+          type: string
+          format: uri
+          example: "https://example.com/photo.jpg"
+        job:
+          type: string
+          example: "Frontend Developer"
