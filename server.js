@@ -10,12 +10,17 @@ const port = process.env.PORT || 3000;
 
 // ✅ Разрешаем CORS
 app.use(cors());
+app.options("*", cors()); // ⬅️ Обработка preflight
 
 // 📦 Middleware
 app.use(bodyParser.json());
 
-// 🧾 Swagger UI
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// 🧾 Swagger UI с отключённым внешним валидатором
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  swaggerOptions: {
+    validatorUrl: null
+  }
+}));
 
 // 📦 Массив данных
 let items = [];
