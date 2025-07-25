@@ -4,7 +4,7 @@ info:
   title: Simple CRUD API
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
+  - url: https://user-8fl6.onrender.com
 paths:
   /items:
     get:
